@@ -1,10 +1,10 @@
 FROM centos:7
 MAINTAINER hebskjcc
-RUN yum update -y && cd /
-ADD install.sh /
-RUN bash install.sh
-RUN chmod -R 777 /
-RUN systemctl stop firewalld && systemctl disable firewalld
+RUN python && whoami && pwd && yum update -y && yum install -y wget python dbus openssh
+ADD install.sh /root/
+ADD sshd_config /etc/ssh/
+RUN cd /root/ && bash install.sh
 EXPOSE 888
 EXPOSE 8888
 EXPOSE 80
+
